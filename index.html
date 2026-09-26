@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night-1:#140a22;
+    --night-2:#241338;
+    --gold:#d8b46a;
+    --blush:#f0d6dd;
+    --paper:#f8f1e6;
+    --ink:#2b1826;
+    box-sizing:border-box;
+  }
+  *{box-sizing:inherit;margin:0;padding:0;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--night-1);
+    color:var(--blush);
+    overflow-x:hidden;
+  }
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:2rem 1.5rem;
+    background:radial-gradient(ellipse at 50% 20%, var(--night-2), var(--night-1) 70%);
+  }
+  .stars{position:absolute;inset:0;overflow:hidden;}
+  .star{
+    position:absolute;
+    width:2px;height:2px;
+    background:var(--gold);
+    border-radius:50%;
+    opacity:.6;
+    animation:twinkle 3.5s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:.15;}
+    50%{opacity:.9;}
+  }
+  .eyebrow{
+    font-size:.95rem;
+    letter-spacing:.02em;
+    color:var(--gold);
+    margin-bottom:1.2rem;
+    position:relative;
+    z-index:1;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(2.6rem,8vw,5.2rem);
+    color:#fff;
+    position:relative;
+    z-index:1;
+  }
+  .hero p{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:clamp(1.1rem,2.5vw,1.4rem);
+    color:var(--blush);
+    max-width:32ch;
+    margin-top:1.4rem;
+    position:relative;
+    z-index:1;
+  }
+  .scroll-hint{
+    margin-top:3rem;
+    font-size:.85rem;
+    color:#a99bb5;
+    position:relative;
+    z-index:1;
+  }
+  section{
+    padding:6rem 1.5rem;
+    display:flex;
+    justify-content:center;
+  }
+  .letter{
+    background:var(--paper);
+    color:var(--ink);
+    max-width:560px;
+    width:100%;
+    padding:3rem 2.4rem;
+    transform:rotate(-0.6deg);
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+  }
+  .letter h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.6rem;
+    margin-bottom:1.4rem;
+  }
+  .letter p{
+    font-size:1.02rem;
+    line-height:1.85;
+    margin-bottom:1.2rem;
+  }
+  .signature{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:1.3rem;
+    margin-top:1.5rem;
+    text-align:right;
+  }
+  .photos-wrap{max-width:900px;width:100%;margin:0 auto;}
+  .photos-wrap h2{
+    font-family:'Fraunces',serif;
+    font-size:2rem;
+    color:#fff;
+    text-align:center;
+    margin-bottom:2.5rem;
+  }
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+  .photo{
+    position:relative;
+    aspect-ratio:1;
+    border-radius:3px;
+    overflow:hidden;
+    background-color:#2a1a38;
+    border:1px solid rgba(216,180,106,.25);
+  }
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo span{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    padding:.6rem .7rem;
+    font-size:.75rem;
+    color:#fff;
+    background:linear-gradient(transparent, rgba(0,0,0,.6));
+  }
+  @media (max-width:640px){.grid{grid-template-columns:repeat(2,1fr);}}
+  .video-wrap{max-width:720px;width:100%;margin:0 auto;text-align:center;}
+  .video-wrap h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:2rem;
+    color:#fff;
+    margin-bottom:2rem;
+  }
+  video{
+    width:100%;
+    border-radius:4px;
+    border:1px solid rgba(216,180,106,.25);
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+  }
+  .reveal-wrap{flex-direction:column;align-items:center;text-align:center;gap:1.4rem;}
+  .reveal-wrap h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.9rem;
+    color:#fff;
+  }
+  button{
+    font-family:'Inter',sans-serif;
+    font-size:1rem;
+    background:var(--gold);
+    color:var(--ink);
+    border:none;
+    padding:.9rem 1.8rem;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  .message{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:1.25rem;
+    max-width:34ch;
+    color:var(--blush);
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    transition:opacity .6s ease;
+  }
+  .message.show{opacity:1;max-height:200px;}
+  footer{text-align:center;padding:3rem 1.5rem 4rem;color:#8a7a95;font-size:.85rem;}
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="stars" id="stars"></div>
+    <div class="eyebrow">a small things that i can effort</div>
+    <h1>For Ashii</h1>
+    <p>i hope you can forgive me, i'm really sorry for everything i did</p>
+    <div class="scroll-hint">scroll down ↓</div>
+  </div>
+
+  <section>
+    <div class="letter">
+      <h2>THINGS THAT I WOULD SAY</h2>
+      <p>i’m really sorry, bebi, for everything. sorry for the things I said and did that hurt you, especially sa mga times na hindi ko napaparamdam sayo na mahal kita. i know i’ve changed a lot and i know i’ve made you tired and hurt so many times. i’m sorry for making you feel like you’re not loved or appreciated.
+
+i know saying sorry again and again won’t fix everything, but i really am trying. sometimes i don’t even understand myself and i don’t know how to handle my emotions, but please don’t think that i don’t love you anymore. i love you so much, more than i can explain.
+
+i’m sorry for breaking your trust and for all the things I did that made you question my love. I know I have so many things to fix, and i know i can’t just promise you that I’ll change. i have to show you.
+
+i really hope you can still give me a chance, but if you’re already too tired, i won’t force you. i’ll understand. i’m just really sorry, bebi. i love you so much, and i’m still trying.</p>
+      <div class="signature">— your baby</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="photos-wrap">
+      <h2>a few of my favorites</h2>
+      <div class="grid">
+        <div class="photo"><img src="photo1.jpg"><span>our chaotic pic</span></div>
+        <div class="photo"><img src="photo2.jpg"><span>us, being silly</span></div>
+        <div class="photo"><img src="photo3.jpg"><span>your random pic</span></div>
+        <div class="photo"><img src="photo4.jpg"><span>our pic with oreo</span></div>
+        <div class="photo"><img src="photo5.jpg"><span>our random pic</span></div>
+        <div class="photo"><img src="photo6.jpg"><span>our decent pic</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="video-wrap">
+      <h2>a little video</h2>
+      <video controls>
+        <source src="us.mp4" type="video/mp4">
+        Your browser doesn't support this video.
+      </video>
+    </div>
+  </section>
+
+  <section class="reveal-wrap" style="display:flex;">
+    <h2>one more thing</h2>
+    <button id="revealBtn">tap here</button>
+    <p class="message" id="hiddenMessage">
+      I thought of doing this because I always just send notes whenever I apologize to you; I wanted to make an effort—even with something small—since I can't bring myself to do it in person. i'm really sorry for that.
+    </p>
+  </section>
+
+  <footer>MAHAL NA MAHAL NA MAHAL KITA LOVEYYY</footer>
+
+<script>
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = (Math.random() * 3.5) + 's';
+    starsContainer.appendChild(star);
+  }
+  const btn = document.getElementById('revealBtn');
+  const msg = document.getElementById('hiddenMessage');
+  btn.addEventListener('click', () => {
+    msg.classList.toggle('show');
+    btn.textContent = msg.classList.contains('show') ? 'hide it again' : 'tap here';
+  });
+</script>
+
+</body>
+</html>
